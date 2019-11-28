@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Darker+Grotesque&display=swap');
+html {
+  background: linear-gradient(rgb(255,255,255,0.65), rgb(255,255,255,0.5)), url(./components/forecastBG.jpg);
+  background-size: cover;
+  height: 100vh;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  /* background-color: #282c34; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.leftHeader {
+  height: 100vh;
+  width: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightInfo {
+  height: 100vh;
+  width: 50%;
+  background: linear-gradient(rgb(0,0,0,0.25), rgb(0,0,0,0.5)), url(./sunnyDay-min.jpg);
+  background-size: cover;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.weatherApp-title {
+  color: cornflowerblue;
+  text-shadow: 1px 3px 5px #ccc;
+  height: 100%;
+}
+
+.weatherApp-title h1 {
+  font-size: 6rem;
+}
+
+.rightInfo .section {
+  background: rgb(240, 248, 255, .70);
+  height: 100%;
+}
+
+.cityCountry {
+  background-color: transparent!important;
+  border: none;
+  padding: 1rem;
+  margin: 2rem .75rem;
+  border-bottom: 5px solid cornflowerblue;
+  font-size: 1.25rem;
+  color: black;
+}
+
+.getWeather {
+  border: none;
+  padding: 1rem;
+  box-shadow: 0px 5px 6px #000000cc;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background: cornflowerblue;
+  color: white;
+}
+
+.getForecasts {
+  border: none;
+  padding: 1rem;
+  box-shadow: 0px 5px 6px #000000cc;
+  border-radius: 5px;
+  margin: 2rem;
+  font-size: 1rem;
+  background: cornflowerblue;
+  color: white;
+}
+
+.weatherCard:hover {
+  box-shadow: 0px 5px 16px #000000cc;
+  position: relative;
+  top: -5px;
+}
+
+.holdFCBtns {
+  display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.holdWeekDay {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 60%;
+}
+
+.weatherCard {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90px;
+    border-bottom: 5px solid cornflowerblue;
+    padding: 1rem 2rem 2rem 2rem;
+    background-color: white;
+}
+
+.tempHighLow {
+  display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.section .container {
+  height: 100%;
+}
+
+/* .section {
+  background: url('./components/forecastBG.jpg')
+} */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.weatherApp-title .bordered {
+  border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    color: aquamarine;
+    font-size: 4.5rem;
+    text-transform: uppercase;
+    text-shadow: 1px 3px 5px #ccc;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
