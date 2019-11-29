@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../components/Form';
 import '../App.css';
+import axios from 'axios';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
@@ -40,60 +41,72 @@ const APPID = '9347522dfc18eb6dc577618e6c9e8db1';
 // let cityName = `Accra`;
 
 class FiveDayForeCast extends React.Component {
-    
   
-       state = {
-            city: undefined,
-            country: undefined,
-            day: new Array(),
-            minTemp: new Array(),
-            maxTemp: new Array(),
-            icon: new Array(),
-            humidity: new Array(),
-            error: undefined
-          }
-        // this.getWeather();
-
-    getWeather = async (event) => {
-        event.preventDefault();
-        const city = event.target.elements.city.value;
-        const country = event.target.elements.country.value;
-        const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${APPID}&units=imperial`);
-        const data = await api_call.json();
-        let day = this.state.day;
-        let minTemp = this.state.minTemp;
-        let maxTemp = this.state.maxTemp;
-        let icon = this.state.icon;
-        let humidity = this.state.humidity;
-
-        if (city && country) {
+    constructor(props) {
+        super(props);
+        this.state = {
+           givenCity: "Miami",
+           givenCountry: "USA",
+           day: new Array(),
+           minTemp: new Array(),
+           maxTemp: new Array(),
+           icon: new Array(),
+           humidity: new Array(),
+           error: undefined,
+        };
+    }
+    getWeather = () => {
+        const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
+        
+        axios.get(api_call).then(response => {
             this.setState({
-              city: city,
-              country: country,
-              error: ""
+                data: response.data
             });
-            for (let i=0; i < data.list.length; i++ ) {
-                day.push(data.list[i].dt_txt);
-                minTemp.push(Math.floor(data.list[i].main.temp_min));
-                maxTemp.push(Math.floor(data.list[i].main.temp_max));
-                icon.push(data.list[i].weather[0].icon);
-                humidity.push(data.list[i].main.humidity);
+
+            let day = [];
+            let minTemp = [];
+            let maxTemp = [];
+            let icon = [];
+            let humidity = [];
+
+            for (let i=0; i < this.state.data.list.length; i++ ) {
+                day.push(this.state.data.list[i].dt_txt);
+                minTemp.push(Math.floor(this.state.data.list[i].main.temp_min));
+                maxTemp.push(Math.floor(this.state.data.list[i].main.temp_max));
+                icon.push(this.state.data.list[i].weather[0].icon);
+                humidity.push(this.state.data.list[i].main.humidity);
             }
-        } else {
-          this.setState({
-            city: undefined,
-            country: undefined,
-            day: undefined,
-            minTemp: undefined,
-            maxTemp: undefined,
-            icon: undefined,
-            humidity: undefined,
-            error: "Please enter the values."
-          });
-         
-        }
-        console.log(data.list);
+            this.setState({
+                city: this.state.data.city.name,
+                country: this.state.data.city.country,
+                day,
+                minTemp,
+                maxTemp,
+                icon,
+                humidity
+              });
+        })
+ 
       }
+      componentDidMount() {
+        this.getWeather();
+      }
+    
+      newLocation = event => {
+        event.preventDefault();
+        const newCityValue = event.target.elements.newCity.value;
+        const newCountryValue = event.target.elements.newCountry.value;
+        this.setState(
+          {
+            givenCity: newCityValue,
+            givenCountry: newCountryValue
+          },
+          () => {
+            this.getWeather();
+          }
+        );
+      };
+   
 
       render() {
           let fivedays = [];
@@ -139,7 +152,7 @@ class FiveDayForeCast extends React.Component {
               <div className="section" style={height}>
                   <div className="container">
                         <h1 style={center}>5-Day Forecast</h1>
-                        <div style={formStyle}><Form getWeather={this.getWeather}/></div>
+                        <div style={formStyle}><Form newLocation={this.newLocation}/></div>
                         <div className="holdWeekDay">{fivedays}</div>
                         <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back</button></Link>
                        
