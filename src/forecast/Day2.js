@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../components/Form';
 import '../App.css';
-import axios from 'axios'
+import axios from 'axios';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 

@@ -53,25 +53,11 @@ class FiveDayForeCast extends React.Component {
             error: undefined,
         };
       }
-    
-    //    state = {
-    //         city: undefined,
-    //         country: undefined,
-    //         today: undefined,
-    //         day: new Array(),
-    //         minTemp: new Array(),
-    //         maxTemp: new Array(),
-    //         icon: new Array(),
-    //         humidity: new Array(),
-    //         error: undefined
-    //       }
         
 
 
     getWeather = () => {
-        // event.preventDefault();
         const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
-        // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${APPID}&units=imperial`);
         let today = new Date();
         let numToday = today.toJSON();
         var now = numToday.split('T')[0];
@@ -109,46 +95,6 @@ class FiveDayForeCast extends React.Component {
         })
         console.log(now);
 
-        // const city = event.target.elements.city.value;
-        // const country = event.target.elements.country.value;
-        // const data = await api_call.json();
-        // let day = this.state.day;
-        // let minTemp = this.state.minTemp;
-        // let maxTemp = this.state.maxTemp;
-        // let icon = this.state.icon;
-        // let humidity = this.state.humidity;
-       
-
-        // if (city && country) {
-        //     this.setState({
-        //       city: city,
-        //       country: country,
-        //       error: ""
-        //     });
-        //     for (let i=0; i < data.list.length; i++ ) {
-        //         day.push(data.list[i].dt_txt);
-        //         minTemp.push(Math.floor(data.list[i].main.temp_min));
-        //         maxTemp.push(Math.floor(data.list[i].main.temp_max));
-        //         icon.push(data.list[i].weather[0].icon);
-        //         humidity.push(data.list[i].main.humidity);
-        //     }
-        // } else {
-        //   this.setState({
-        //     city: undefined,
-        //     country: undefined,
-        //     day: undefined,
-        //     today: this.props.today,
-        //     minTemp: undefined,
-        //     maxTemp: undefined,
-        //     icon: undefined,
-        //     humidity: undefined,
-        //     error: "Please enter the values."
-        //   });
-         
-        // }
-        // console.log(data.list.length);
-        // console.log(now);
-        // console.log(day[0]);
       }
 
       componentDidMount() {
