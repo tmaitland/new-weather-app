@@ -1,23 +1,22 @@
 import React from 'react';
-import axios from 'axios';
 import ReactDOM from 'react-dom';
 
 const divStyle = {
     // width:'100%',   
     // color: '#000066',
-    color: 'white',
+    color:'white',
     backgroundColor: 'black'
 }
 
-const left = {
-    float: 'left',
-    backgroundSize: '100% 100%',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor: '#66ccff',
-    width: '100%',
-    height: '800px'
-}
+ const left = {
+     float: 'left',
+     backgroundSize: '100% 100%',
+     backgroundPosition: 'center',
+     backgroundRepeat:'no-repeat',
+     backgroundColor:'#66ccff',
+     width:'100%',
+     height: '800px'
+ }
 //  const left1 = {
 //      float: 'left',
 //      backgroundSize: '100% 100%',
@@ -27,39 +26,28 @@ const left = {
 //      width:'50%',
 //      height: '800px'
 //  }
-// const OpenWeatherMapHelper = require("openweathermap-node");
-// const helper = new OpenWeatherMapHelper({
-//     APPID: '9347522dfc18eb6dc577618e6c9e8db1',
-//     units: "imperial"
-// });
+const OpenWeatherMapHelper = require("openweathermap-node");
+const helper = new OpenWeatherMapHelper({
+    APPID: '',
+    units:"imperial"
+});
 
-const APPID = '9347522dfc18eb6dc577618e6c9e8db1';
-
-class ThreeHourForecast extends React.Component {
+class ThreeHourForecast extends React.Component{ 
     constructor(props) {
         super(props);
 
         this.state = {
-            givenCity: "Miami",
-            givenCountry: "USA",
             dates: new Array(),
-            mins: new Array(),
-            maxs: new Array(),
+            mins : new Array(),
+            maxs : new Array(),
             icons: new Array(),
             dayNum: props.dayNum,
-            dateReq: props.dayNum
-        };
+            dateReq: props.dayNum    
 
-        // this.getWeatherData();
+        }
+        this.getWeatherData();
     }
-    getWeatherData = () => {
-        const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
-        
-        axios.get(api_call).then(response => {
-            this.setState({
-                data: response.data
-            });
-
+    getWeatherData(){
         let dates = this.state.dates;
         let mins = this.state.mins;
         let maxs = this.state.maxs;
@@ -72,15 +60,15 @@ class ThreeHourForecast extends React.Component {
         maxs = new Array();
         icons = new Array();
         // dayNum = new Array();
-
-
-
-        helper.getThreeHourForecastByCityName("Miami", (err, threeHourForecast) => {
-            if (err) {
+        
+        
+        
+        helper.getThreeHourForecastByCityName("Miami", (err,threeHourForecast) => {
+            if (err){
                 console.log(err);
-
-            } else {
-                for (let i = 0; i < threeHourForecast.list.length; i++) {
+        
+            }else{
+                for (let i=0;i < threeHourForecast.list.length; i++ ) {
                     dates.push(threeHourForecast.list[i].dt_txt);
                     mins.push(Math.floor(temperatureConverter(threeHourForecast.list[i].main.temp_min)));
                     maxs.push(Math.floor(temperatureConverter(threeHourForecast.list[i].main.temp_max)));
@@ -93,8 +81,8 @@ class ThreeHourForecast extends React.Component {
             console.log(icons.length);
 
 
-
-
+           
+          
             var today = new Date();
             dayNum = today.getDay();
             // this.setState({dayNum});
@@ -111,15 +99,15 @@ class ThreeHourForecast extends React.Component {
         });
 
 
-
+        
         function temperatureConverter(valNum) {
             valNum = parseFloat(valNum);
-            return ((valNum - 273.15) * 1.8) + 32;
+            return((valNum-273.15)*1.8)+32;
         }
     }
 
 
-    render() {
+    render(){
         const items = [];
 
         let iconurl = 'http://openweathermap.org/img/w/';
@@ -127,30 +115,27 @@ class ThreeHourForecast extends React.Component {
         let imgext = '.png';
 
         let cityName = <input type="text" id="cityName" />;
+        
 
-
-        for (let i = 0; i < this.state.dates.length; i++) {
-            if (this.state.dates[i].startsWith(this.state.dateReq)) {
-                items.push(<tr><td>{this.state.dates[i]}</td><td><img src={`${iconurl}${this.state.icons[i]}${imgext}`} alt="weather icon" /></td><td>{this.state.mins[i]}</td><td>{this.state.maxs[i]}</td></tr>)
-                console.log(items)
-            }
+        for (let i=0; i < this.state.dates.length; i++) {
+           if(this.state.dates[i].startsWith(this.state.dateReq)) {
+           items.push(<tr><td>{this.state.dates[i]}</td><td><img src={`${iconurl}${this.state.icons[i]}${imgext}`} alt="weather icon" /></td><td>{this.state.mins[i]}</td><td>{this.state.maxs[i]}</td></tr>)
+            console.log(items)
+           }
         }
-        return (
-            <div style={divStyle}>
+        return(
+            <div style ={divStyle}>
                 <div style={left}>
 
                     <h1> Today's Weather Information:</h1>
-                    <br />
+                    <br/>
                     <table border="1">
                         <tr><td>Date</td><td>Weather</td><td>Min</td><td>Max</td></tr>
                         {items}
                     </table>
                 </div>
-
-
             </div>
         );
     }
 }
-
 export default ThreeHourForecast;
