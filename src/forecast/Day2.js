@@ -135,7 +135,7 @@ class FiveDayForeCast extends React.Component {
             let weekDay = thatDay.getDay();
             var time = eachDay.split(' ')[1];
 
-            // holdWeekDay.innerHTML = "";
+            // holdWeekDa`y.innerHTML = "";
 
             if(eachDay.startsWith(tomorrow)) {
             

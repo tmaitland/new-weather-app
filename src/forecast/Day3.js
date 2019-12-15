@@ -161,7 +161,7 @@ class FiveDayForeCast extends React.Component {
               <div className="section" style={height}>
                   <div className="container">
                         <h1 style={center}>Day Three's Forecast</h1>
-                        <div style={formStyle}><Form getWeather={this.getWeather}/></div>
+                        <div style={formStyle}><Form newLocation={this.newLocation}/></div>
                         <div className="holdWeekDay">{threeHours}</div>
                         <div className="holdFCBtns">
                             <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back Home</button></Link>
