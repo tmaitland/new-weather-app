@@ -145,6 +145,7 @@ class FiveDayForeCast extends React.Component {
                 </div>
                 <div className="tempHighLow">
                     <span className="temp">{this.state.minTemp[i]}&#176;F</span>
+                    <span>&nbsp;|&nbsp;</span>
                     <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
                 </div>    
             </div>
@@ -160,10 +161,15 @@ class FiveDayForeCast extends React.Component {
                   <div className="container">
                         <h1 style={center}>Day Four's Forecast</h1>
                         <div style={formStyle}><Form newLocation={this.newLocation}/></div>
-                        <div className="holdWeekDay">{threeHours}</div>
+                        <div className="holdWeekDay" id="holdWeekDay">
+                          <div className="hourlyForecast">
+                            {threeHours}
+                          </div>  
+                        </div>                       
                         <div className="holdFCBtns">
-                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back Home</button></Link>
-                            <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back to 5-Day</button></Link>
+                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Home</button></Link>
+                            <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>5-Day Forecast</button></Link>
+                            <Link to="./Day5" style={noUnderline}><button className="getForecasts" style={centerBtn}>Day 5</button></Link>
                         </div>
                        
                       

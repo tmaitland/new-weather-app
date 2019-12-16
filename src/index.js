@@ -7,6 +7,7 @@ import Day2 from './forecast/Day2';
 import Day3 from './forecast/Day3';
 import Day4 from './forecast/Day4';
 import Day5 from './forecast/Day5';
+import Dashboard from './components/Dashboard';
 import FiveDayForecast from './forecast/FiveDayForecast';
 // import ThreeHourForecast from './forecast/ThreeHourForecast';
 import * as serviceWorker from './serviceWorker';
@@ -18,6 +19,7 @@ export const routing = (
         <Route exact path="/" component={App} />
         <Route exact path="/forecast/FiveDayForecast" component={FiveDayForecast} />
         {/* <Route exact path="/forecast/ThreeHourForecast" component={ThreeHourForecast} /> */}
+        <Route exact path="./components/Dashboard" component={Dashboard} />
         <Route exact path="/forecast/Day1" component={Day1} />
         <Route exact path="/forecast/Day2" component={Day2} />
         <Route exact path="/forecast/Day3" component={Day3} />

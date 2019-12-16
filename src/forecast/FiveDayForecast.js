@@ -153,7 +153,11 @@ class FiveDayForeCast extends React.Component {
                   <div className="container">
                         <h1 style={center}>5-Day Forecast</h1>
                         <div style={formStyle}><Form newLocation={this.newLocation}/></div>
-                        <div className="holdWeekDay">{fivedays}</div>
+                        <div className="holdWeekDay">
+                            <div className="fiveDays">
+                                {fivedays}
+                            </div>
+                        </div>
                         <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back</button></Link>
                        
                       

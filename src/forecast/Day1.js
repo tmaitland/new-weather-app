@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../components/Form';
 import '../App.css';
-import axios from 'axios'
+import axios from 'axios';
+import Dashboard from '../components/Dashboard';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
@@ -53,14 +54,14 @@ class FiveDayForeCast extends React.Component {
             error: undefined,
         };
       }
-        
+ 
 
 
     getWeather = () => {
         const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
         let today = new Date();
         let numToday = today.toJSON();
-        var now = numToday.split('T')[0];
+        let now = numToday.split('T')[0];
 
         axios.get(api_call).then(response => {
             this.setState({
@@ -145,11 +146,13 @@ class FiveDayForeCast extends React.Component {
                 </div>
                 <div className="tempHighLow">
                     <span className="temp">{this.state.minTemp[i]}&#176;F</span>
+                    <span>&nbsp;|&nbsp;</span>
                     <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
                 </div>    
             </div>
             );
              console.log(weekDay)
+             console.log(now)
             }
             // else if (limitNum === undefined) {
             //     fivedays.push(<h3>{this.state.error}</h3>)
@@ -164,11 +167,16 @@ class FiveDayForeCast extends React.Component {
                             //  givenCity={this.state.newCityValue}
                             //  givenCountry={this.state.newCountryValue}
                         /></div>
-                        <div className="holdWeekDay" id="holdWeekDay">{threeHours}</div>
+                        <div className="holdWeekDay" id="holdWeekDay">
+                          <div className="hourlyForecast">
+                            {threeHours}
+                          </div>  
+                        </div>
                         
                         <div className="holdFCBtns">
-                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back Home</button></Link>
-                            <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back to 5-Day</button></Link>
+                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Home</button></Link>
+                            <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>5-Day Forecast</button></Link>
+                            <Link to="./Day2" style={noUnderline}><button className="getForecasts" style={centerBtn}>Day 2</button></Link>
                         </div>
                        
                       

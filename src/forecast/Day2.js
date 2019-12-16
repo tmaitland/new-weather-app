@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../components/Form';
+import Modal from '../components/Modal';
 import '../App.css';
 import axios from 'axios';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
@@ -51,9 +52,18 @@ class FiveDayForeCast extends React.Component {
             icon: new Array(),
             humidity: new Array(),
             error: undefined,
+            show: false
         };
       }
-        
+      
+      
+      showModal = () => {
+        this.setState({ show: true });
+      };
+
+      hideModal = () => {
+        this.setState({ show: false });
+      };
 
 
       getWeather = () => {
@@ -68,11 +78,11 @@ class FiveDayForeCast extends React.Component {
             });
             console.log(response.data)
 
-            let day = [];
-            let minTemp = [];
-            let maxTemp = [];
-            let icon = [];
-            let humidity = [];
+            let day = new Array();
+            let minTemp = new Array();
+            let maxTemp = new Array();
+            let icon = new Array();
+            let humidity = new Array();
 
             for (let i=0; i < this.state.data.list.length; i++ ) {
                 day.push(this.state.data.list[i].dt_txt);
@@ -117,7 +127,7 @@ class FiveDayForeCast extends React.Component {
       };
 
       render() {
-          let threeHours = [];
+          let threeHours = new Array();
           let iconurl = 'http://openweathermap.org/img/w/';
           let imgext = '.png';
           let today = new Date();
@@ -127,36 +137,60 @@ class FiveDayForeCast extends React.Component {
           tomorrow = tomorrow.split('T')[0];
         //   let limitNum = this.state.day.length / 5;
 
-        for (let i=0; i < this.state.day.length; i++) {
+        for (let i=0; i < this.state.day.length; ++i) {
             let holdWeekDay = document.getElementById("holdWeekDay");
             let weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             let eachDay = this.state.day[i];
             let thatDay = new Date(eachDay);
             let weekDay = thatDay.getDay();
-            var time = eachDay.split(' ')[1];
+            let time = eachDay.split(' ')[1];
 
             // holdWeekDa`y.innerHTML = "";
 
-            if(eachDay.startsWith(tomorrow)) {
+          if(eachDay.startsWith(tomorrow)) {
             
            threeHours.push(
-            <div className="weatherCard">
-                <h3 style={center}>{weekDays[weekDay]} {time} </h3>
-                <div className="holdIcon">
-                    <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />
-                </div>
-                <div className="tempHighLow">
-                    <span className="temp">{this.state.minTemp[i]}&#176;F</span>
-                    <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
-                </div>    
-            </div>
+             <div>
+                <Modal show={this.state.show} handleClose={this.hideModal}>
+                  <h3 style={center}>{weekDays[weekDay]} {time} </h3>
+                    <div className="holdIcon">
+                        <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />
+                    </div>
+                    <div className="tempHighLow">
+                        <span className="temp">{this.state.minTemp[i]}&#176;F</span>
+                        <span>|</span>
+                        <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
+                    </div>
+                </Modal>
+              <div className="weatherCard" key={i}>
+                  <h3 style={center}>{weekDays[weekDay]} {time} </h3>
+                  <div className="holdIcon">
+                      <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />
+                  </div>
+                  <div className="tempHighLow">
+                      <span className="temp">{this.state.minTemp[i]}&#176;F</span>
+                      <span>|</span>
+                      <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
+                  </div>   
+                
+                  <button type="button" onClick={this.showModal}>
+                    <h3>open</h3>
+                  </button> 
+              </div>
+
+             </div>
+            
             );
-             console.log(weekDay)
+            
+            //  console.log(threeHours.key)
+             
             }
             // else if (limitNum === undefined) {
             //     fivedays.push(<h3>{this.state.error}</h3>)
             // }
          }
+        
+
           return (
               <div className="section" style={height}>
                   <div className="container">
@@ -166,10 +200,15 @@ class FiveDayForeCast extends React.Component {
                                
                             />
                         </div>
-                        <div className="holdWeekDay">{threeHours}</div>
+                        <div className="holdWeekDay" id="holdWeekDay">
+                          <div className="hourlyForecast">
+                            {threeHours}
+                          </div> 
+                        </div>
                         <div className="holdFCBtns">
-                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back Home</button></Link>
-                            <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back to 5-Day</button></Link>
+                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Home</button></Link>
+                            <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>5-Day Forecast</button></Link>
+                            <Link to="./Day3" style={noUnderline}><button className="getForecasts" style={centerBtn}>Day 3</button></Link>
                         </div>
                        
                       
