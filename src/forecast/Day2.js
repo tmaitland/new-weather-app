@@ -4,6 +4,8 @@ import Form from '../components/Form';
 import Modal from '../components/Modal';
 import '../App.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
@@ -51,6 +53,8 @@ class FiveDayForeCast extends React.Component {
             maxTemp: new Array(),
             icon: new Array(),
             humidity: new Array(),
+            weather: new Array(),
+            weatherDescription: new Array(),
             error: undefined,
             show: false
         };
@@ -83,12 +87,16 @@ class FiveDayForeCast extends React.Component {
             let maxTemp = new Array();
             let icon = new Array();
             let humidity = new Array();
+            let weather = new Array();
+            let weatherDescription = new Array();
 
             for (let i=0; i < this.state.data.list.length; i++ ) {
                 day.push(this.state.data.list[i].dt_txt);
                 minTemp.push(Math.floor(this.state.data.list[i].main.temp_min));
                 maxTemp.push(Math.floor(this.state.data.list[i].main.temp_max));
                 icon.push(this.state.data.list[i].weather[0].icon);
+                weather.push(this.state.data.list[i].weather[0].main);
+                weatherDescription.push(this.state.data.list[i].weather[0].description);
                 humidity.push(this.state.data.list[i].main.humidity);
             }
             this.setState({
@@ -99,6 +107,8 @@ class FiveDayForeCast extends React.Component {
                 minTemp,
                 maxTemp,
                 icon,
+                weather,
+                weatherDescription,
                 humidity
               });
               console.log(this.state.data.city.name)
@@ -144,7 +154,7 @@ class FiveDayForeCast extends React.Component {
             let thatDay = new Date(eachDay);
             let weekDay = thatDay.getDay();
             let time = eachDay.split(' ')[1];
-
+            let ii = i;
             // holdWeekDa`y.innerHTML = "";
 
           if(eachDay.startsWith(tomorrow)) {
@@ -152,7 +162,23 @@ class FiveDayForeCast extends React.Component {
            threeHours.push(
              <div>
                 <Modal show={this.state.show} handleClose={this.hideModal}>
-                  <h3 style={center}>{weekDays[weekDay]} {time} </h3>
+                  <h2 style={center}>{weekDays[weekDay]}</h2>
+                  {/* <h4 style={center}>{time}</h4> */}
+                    <div className="holdIcon">
+                        <img src={`${iconurl}${this.state.icon[ii]}${imgext}`} alt="weather icon" className="weather-icon" />
+                        <h3>Humidity:</h3> <p>{this.state.humidity[ii]}</p>
+                        <h3>Weather:</h3> <p>{this.state.weather[ii]}</p>
+                        <h3>Description:</h3> <p>{this.state.weatherDescription[ii]}</p>
+                    </div>
+                    <div className="tempHighLow">
+                       <h3>High:</h3> <p className="temp">{this.state.minTemp[ii]}&#176;F</p>
+                        <p>|</p>
+                       <h3>Low:</h3> <p className="temp">{this.state.maxTemp[ii]}&#176;F</p>
+                    </div>
+                </Modal>
+              <button type="button" onClick={this.showModal} className="threeHrButtons">
+                <div className="weatherCard" key={i}>
+                    <h3 style={center}>{weekDays[weekDay]} {time} </h3>
                     <div className="holdIcon">
                         <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />
                     </div>
@@ -160,23 +186,11 @@ class FiveDayForeCast extends React.Component {
                         <span className="temp">{this.state.minTemp[i]}&#176;F</span>
                         <span>|</span>
                         <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
-                    </div>
-                </Modal>
-              <div className="weatherCard" key={i}>
-                  <h3 style={center}>{weekDays[weekDay]} {time} </h3>
-                  <div className="holdIcon">
-                      <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />
-                  </div>
-                  <div className="tempHighLow">
-                      <span className="temp">{this.state.minTemp[i]}&#176;F</span>
-                      <span>|</span>
-                      <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
-                  </div>   
-                
-                  <button type="button" onClick={this.showModal}>
-                    <h3>open</h3>
-                  </button> 
-              </div>
+                    </div>   
+                  
+                      {/* <h3>open</h3> */}
+                </div>
+              </button> 
 
              </div>
             
@@ -194,11 +208,9 @@ class FiveDayForeCast extends React.Component {
           return (
               <div className="section" style={height}>
                   <div className="container">
-                        <h1 style={center}>Tomorrow's Forecast</h1>
+                        <h1 style={center} className="titleForecast">  Tomorrow's Forecast <Link to="/" style={noUnderline} className="homeBtn"><button className="getForecasts" style={centerBtn}><FontAwesomeIcon icon={faHome} /></button></Link> </h1>
                         <div style={formStyle}>
-                        <Form newLocation={this.newLocation}
-                               
-                            />
+                        <Form newLocation={this.newLocation}/>
                         </div>
                         <div className="holdWeekDay" id="holdWeekDay">
                           <div className="hourlyForecast">
@@ -206,7 +218,7 @@ class FiveDayForeCast extends React.Component {
                           </div> 
                         </div>
                         <div className="holdFCBtns">
-                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Home</button></Link>
+                            <Link to="./Day1" style={noUnderline}><button className="getForecasts" style={centerBtn}>Day 1</button></Link>
                             <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>5-Day Forecast</button></Link>
                             <Link to="./Day3" style={noUnderline}><button className="getForecasts" style={centerBtn}>Day 3</button></Link>
                         </div>

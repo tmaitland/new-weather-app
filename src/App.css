@@ -141,6 +141,18 @@ body {
   padding: 3rem;
   flex-wrap: wrap;
 }
+
+.titleForecast {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.homeBtn {
+  margin-left: 2rem;
+}
+
 .fiveDays {
   padding: 2rem 0rem;
   width: 100%;
@@ -183,17 +195,46 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   width:100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.weather-icon {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
 }
 
 .modal-main {
   position:fixed;
   background: white;
-  width: 80%;
+  width: 30%;
   height: auto;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
+  padding: 2rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  transform: rotate(45deg);
+}
+
+.closeButton:focus {
+  outline: none;
+}
+
+.threeHrButtons {
+  background: none;
+  border: none;
+}
+
+.threeHrButtons:focus {
+  outline: none;
 }
 
 .display-block {
