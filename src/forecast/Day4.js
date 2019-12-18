@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from '../components/Form';
+import Modal from '../components/Modal';
 import '../App.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
@@ -50,69 +53,87 @@ class FiveDayForeCast extends React.Component {
             maxTemp: new Array(),
             icon: new Array(),
             humidity: new Array(),
+            weather: new Array(),
+            weatherDescription: new Array(),
             error: undefined,
+            show: false
         };
       }
         
+    showModal = () => {
+      this.setState({ show: true });
+    };
+
+    hideModal = () => {
+      this.setState({ show: false });
+    };
 
 
     getWeather = () => {
-        const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
-        let today = new Date();
-        let numToday = today.toJSON();
-        var now = numToday.split('T')[0];
+      const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
+      let today = new Date();
+      let numToday = today.toJSON();
+      var now = numToday.split('T')[0];
 
-        axios.get(api_call).then(response => {
-            this.setState({
-                data: response.data
-            });
-            console.log(response.data)
+      axios.get(api_call).then(response => {
+          this.setState({
+              data: response.data
+          });
+          console.log(response.data)
 
-            let day = [];
-            let minTemp = [];
-            let maxTemp = [];
-            let icon = [];
-            let humidity = [];
+          let day = new Array();
+          let minTemp = new Array();
+          let maxTemp = new Array();
+          let icon = new Array();
+          let humidity = new Array();
+          let weather = new Array();
+          let weatherDescription = new Array();
 
-            for (let i=0; i < this.state.data.list.length; i++ ) {
-                day.push(this.state.data.list[i].dt_txt);
-                minTemp.push(Math.floor(this.state.data.list[i].main.temp_min));
-                maxTemp.push(Math.floor(this.state.data.list[i].main.temp_max));
-                icon.push(this.state.data.list[i].weather[0].icon);
-                humidity.push(this.state.data.list[i].main.humidity);
-            }
-            this.setState({
-                city: this.state.data.city.name,
-                country: this.state.data.city.country,
-                day,
-                today,
-                minTemp,
-                maxTemp,
-                icon,
-                humidity
-              });
-              console.log(this.state.data.city.name)
-        })
-        console.log(now);
-      }
-      componentDidMount() {
-        this.getWeather();
-      }
-
-      newLocation = event => {
-        event.preventDefault();
-        const newCityValue = event.target.elements.newCity.value;
-        const newCountryValue = event.target.elements.newCountry.value;
-        this.setState(
-          {
-            givenCity: newCityValue,
-            givenCountry: newCountryValue
-          },
-          () => {
-            this.getWeather();
+          for (let i=0; i < this.state.data.list.length; i++ ) {
+              day.push(this.state.data.list[i].dt_txt);
+              minTemp.push(Math.floor(this.state.data.list[i].main.temp_min));
+              maxTemp.push(Math.round(this.state.data.list[i].main.temp_max));
+              icon.push(this.state.data.list[i].weather[0].icon);
+              weather.push(this.state.data.list[i].weather[0].main);
+              weatherDescription.push(this.state.data.list[i].weather[0].description);
+              humidity.push(this.state.data.list[i].main.humidity);
           }
-        );
-      };
+          this.setState({
+              city: this.state.data.city.name,
+              country: this.state.data.city.country,
+              day,
+              today,
+              minTemp,
+              maxTemp,
+              icon,
+              weather,
+              weatherDescription,
+              humidity
+            });
+            console.log(this.state.data.city.name)
+      })
+      console.log(now);
+
+    }
+
+    componentDidMount() {
+      this.getWeather();
+    }
+
+    newLocation = event => {
+      event.preventDefault();
+      const newCityValue = event.target.elements.newCity.value;
+      const newCountryValue = event.target.elements.newCountry.value;
+      this.setState(
+        {
+          givenCity: newCityValue,
+          givenCountry: newCountryValue
+        },
+        () => {
+          this.getWeather();
+        }
+      );
+    };
 
       render() {
           let threeHours = [];
@@ -138,17 +159,39 @@ class FiveDayForeCast extends React.Component {
             if(eachDay.startsWith(dayFour)) {
             
            threeHours.push(
-            <div className="weatherCard">
-                <h3 style={center}>{weekDays[weekDay]} {time} </h3>
-                <div className="holdIcon">
-                    <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />
-                </div>
-                <div className="tempHighLow">
-                    <span className="temp">{this.state.minTemp[i]}&#176;F</span>
-                    <span>&nbsp;|&nbsp;</span>
-                    <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
-                </div>    
-            </div>
+            <div>
+              <Modal show={this.state.show} handleClose={this.hideModal}>
+                <h2 style={center}>{weekDays[weekDay]}</h2>
+                {/* <h4 style={center}>{time}</h4> */}
+                  <div className="holdIcon">
+                      <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" className="weather-icon" />
+                      <h3>Humidity:</h3> <p>{this.state.humidity[i]}</p>
+                      <h3>Weather:</h3> <p>{this.state.weather[i]}</p>
+                      <h3>Description:</h3> <p>{this.state.weatherDescription[i]}</p>
+                  </div>
+                  <div className="tempHighLow">
+                    <h3>High:</h3> <p className="temp">{this.state.minTemp[i]}&#176;F</p>
+                      <p>|</p>
+                    <h3>Low:</h3> <p className="temp">{this.state.maxTemp[i]}&#176;F</p>
+                  </div>
+              </Modal>
+            <button type="button" onClick={this.showModal} className="threeHrButtons">
+              <div className="weatherCard" key={i}>
+                  <h3 style={center}>{weekDays[weekDay]} {time} </h3>
+                  <div className="holdIcon">
+                      <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />
+                  </div>
+                  <div className="tempHighLow">
+                      <span className="temp">{this.state.minTemp[i]}&#176;F</span>
+                      <span>|</span>
+                      <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
+                  </div>   
+                
+                    {/* <h3>open</h3> */}
+              </div>
+            </button> 
+
+          </div>
             );
              console.log(weekDay)
             }
@@ -159,7 +202,7 @@ class FiveDayForeCast extends React.Component {
           return (
               <div className="section" style={height}>
                   <div className="container">
-                        <h1 style={center}>Day Four's Forecast</h1>
+                     <h1 style={center} className="titleForecast">  Day Four's Forecast <Link to="/" style={noUnderline} className="homeBtn"><FontAwesomeIcon icon={faHome} /></Link> </h1>
                         <div style={formStyle}><Form newLocation={this.newLocation}/></div>
                         <div className="holdWeekDay" id="holdWeekDay">
                           <div className="hourlyForecast">
@@ -167,7 +210,7 @@ class FiveDayForeCast extends React.Component {
                           </div>  
                         </div>                       
                         <div className="holdFCBtns">
-                            <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Home</button></Link>
+                            <Link to="./Day3" style={noUnderline}><button className="getForecasts" style={centerBtn}>Day 3</button></Link>
                             <Link to="./FiveDayForecast" style={noUnderline}><button className="getForecasts" style={centerBtn}>5-Day Forecast</button></Link>
                             <Link to="./Day5" style={noUnderline}><button className="getForecasts" style={centerBtn}>Day 5</button></Link>
                         </div>

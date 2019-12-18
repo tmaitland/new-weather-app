@@ -93,7 +93,7 @@ class FiveDayForeCast extends React.Component {
             for (let i=0; i < this.state.data.list.length; i++ ) {
                 day.push(this.state.data.list[i].dt_txt);
                 minTemp.push(Math.floor(this.state.data.list[i].main.temp_min));
-                maxTemp.push(Math.floor(this.state.data.list[i].main.temp_max));
+                maxTemp.push(Math.round(this.state.data.list[i].main.temp_max));
                 icon.push(this.state.data.list[i].weather[0].icon);
                 weather.push(this.state.data.list[i].weather[0].main);
                 weatherDescription.push(this.state.data.list[i].weather[0].description);
@@ -208,7 +208,7 @@ class FiveDayForeCast extends React.Component {
           return (
               <div className="section" style={height}>
                   <div className="container">
-                        <h1 style={center} className="titleForecast">  Tomorrow's Forecast <Link to="/" style={noUnderline} className="homeBtn"><button className="getForecasts" style={centerBtn}><FontAwesomeIcon icon={faHome} /></button></Link> </h1>
+                        <h1 style={center} className="titleForecast">  Tomorrow's Forecast <Link to="/" style={noUnderline} className="homeBtn"><FontAwesomeIcon icon={faHome} /></Link> </h1>
                         <div style={formStyle}>
                         <Form newLocation={this.newLocation}/>
                         </div>

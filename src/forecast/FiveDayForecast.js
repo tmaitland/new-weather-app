@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Form from '../components/Form';
 import '../App.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
@@ -35,6 +37,10 @@ const formStyle = {
 const noUnderline = {
     textDecoration: 'none',
     color: 'black'
+}
+const noUnderlineHome = {
+    textDecoration: 'none',
+    // color: 'black'
 }
 
 const APPID = '9347522dfc18eb6dc577618e6c9e8db1';
@@ -72,7 +78,7 @@ class FiveDayForeCast extends React.Component {
             for (let i=0; i < this.state.data.list.length; i++ ) {
                 day.push(this.state.data.list[i].dt_txt);
                 minTemp.push(Math.floor(this.state.data.list[i].main.temp_min));
-                maxTemp.push(Math.floor(this.state.data.list[i].main.temp_max));
+                maxTemp.push(Math.round(this.state.data.list[i].main.temp_max));
                 icon.push(this.state.data.list[i].weather[0].icon);
                 humidity.push(this.state.data.list[i].main.humidity);
             }
@@ -137,6 +143,7 @@ class FiveDayForeCast extends React.Component {
                 </div>
                 <div className="tempHighLow">
                     <span className="temp">{this.state.minTemp[i]}&#176;F</span>
+                    <span>|</span>
                     <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
                 </div>    
             </div>
@@ -151,14 +158,14 @@ class FiveDayForeCast extends React.Component {
           return (
               <div className="section" style={height}>
                   <div className="container">
-                        <h1 style={center}>5-Day Forecast</h1>
+                        <h1 style={center} className="titleForecast">5-Day Forecast <Link to="/" style={noUnderlineHome} className="homeBtn"><FontAwesomeIcon icon={faHome} /></Link></h1>
                         <div style={formStyle}><Form newLocation={this.newLocation}/></div>
                         <div className="holdWeekDay">
                             <div className="fiveDays">
                                 {fivedays}
                             </div>
                         </div>
-                        <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Back</button></Link>
+                        <Link to="/" style={noUnderline}><button className="getForecasts" style={centerBtn}>Go Home</button></Link>
                        
                       
                   </div>

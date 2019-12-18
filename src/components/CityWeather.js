@@ -14,7 +14,7 @@ const tableStyles = {
     /* display: flex; */
     /* flex-direction: column; */
     /* justify-content: center; */
-    padding: '2rem 2rem'
+    padding: '0rem'
 }
 
 const weatherInfo = {
@@ -26,27 +26,33 @@ const CityWeather = props => (
 	<div className="weather__info" style={weatherInfo}>
 		<table style={tableStyles}>
 			{	
-				props.city && props.country && <tr className="weather__key"><td>Location:</td> 
-					<td className="weather__value" style={capitalize}> { props.city }, { props.country }</td>
+				props.city && props.country && <tr className="weather__key"><td><h4>Location:</h4></td> 
+					<td className="weather__value cityLocation" style={capitalize}> { props.city }, { props.country }</td>
 				</tr> 
 			}
 			{
-				props.icon && <tr className="weather__key"><td> Icon:</td>
+				props.icon && <tr className="weather__key"><td><h4>Icon:</h4> </td>
 					<td><img src={`${iconurl}${ props.icon }${imgext}`} alt="weather icon" className="weather_icon" /></td>
 				</tr>
 			}
 			{ 	
-				props.temperature && <tr className="weather__key"><td>Temperature: </td> 
+				props.temperature && <tr className="weather__key"><td><h4>Temperature:</h4> </td> 
 					<td className="weather__value"> { Math.round(props.temperature) }&#176;F</td>
 				</tr> 
 			}
 			{ 	
-				props.humidity && <tr className="weather__key"><td>Humidity: </td> 
+				props.humidity && <tr className="weather__key"><td><h4>Humidity: </h4></td> 
 					<td className="weather__value"> { props.humidity }% </td>
 				</tr> 
 			}
 			{ 	
-				props.description && <tr className="weather__key"><td> Conditions: </td>
+				props.weather && <tr className="weather__key"><td><h4>Weather:</h4>  </td>
+					<td className="weather__value" style={capitalize} > { props.weather } </td>
+				</tr> 
+			}
+		
+			{ 	
+				props.description && <tr className="weather__key"><td><h4>Conditions:</h4>  </td>
 					<td className="weather__value" style={capitalize} > { props.description } </td>
 				</tr> 
 			}
