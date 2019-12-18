@@ -26,15 +26,11 @@ const CityWeather = props => (
 	<div className="weather__info" style={weatherInfo}>
 		<table style={tableStyles}>
 			{	
-				props.city && props.country && <tr className="weather__key"><td><h4>Location:</h4></td> 
-					<td className="weather__value cityLocation" style={capitalize}> { props.city }, { props.country }</td>
+				props.city && props.country && props.icon && <tr className="weather__key cityLocation frontPageWeather" style={capitalize}><h4 className="cityAndIcon">{ props.city }, { props.country } </h4> <img src={`${iconurl}${ props.icon }${imgext}`} alt="weather icon" className="weather_icon" />
+					{/* <td className="weather__value ">  </td> */}
 				</tr> 
 			}
-			{
-				props.icon && <tr className="weather__key"><td><h4>Icon:</h4> </td>
-					<td><img src={`${iconurl}${ props.icon }${imgext}`} alt="weather icon" className="weather_icon" /></td>
-				</tr>
-			}
+			
 			{ 	
 				props.temperature && <tr className="weather__key"><td><h4>Temperature:</h4> </td> 
 					<td className="weather__value"> { Math.round(props.temperature) }&#176;F</td>

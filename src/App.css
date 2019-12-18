@@ -198,6 +198,20 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Alegreya Sans SC', sans-serif;
 }
 
+.frontPageWeather {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cityAndIcon {
+  font-size: 2rem;
+}
+
+.frontPageIcon {
+  margin-left: 4rem;
+}
+
 .modal {
   position: fixed;
   top: 0;

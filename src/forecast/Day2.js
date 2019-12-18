@@ -171,9 +171,9 @@ class FiveDayForeCast extends React.Component {
                         <h3>Description:</h3> <p>{this.state.weatherDescription[ii]}</p>
                     </div>
                     <div className="tempHighLow">
-                       <h3>High:</h3> <p className="temp">{this.state.minTemp[ii]}&#176;F</p>
+                       <h3>Low:</h3> <p className="temp">{this.state.minTemp[ii]}&#176;F</p>
                         <p>|</p>
-                       <h3>Low:</h3> <p className="temp">{this.state.maxTemp[ii]}&#176;F</p>
+                       <h3>High:</h3> <p className="temp">{this.state.maxTemp[ii]}&#176;F</p>
                     </div>
                 </Modal>
               <button type="button" onClick={this.showModal} className="threeHrButtons">
