@@ -70,7 +70,7 @@ class FiveDayForeCast extends React.Component {
 
 
       getWeather = () => {
-        const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
+        const api_call = `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
         let today = new Date();
         let numToday = today.toJSON();
         var now = numToday.split('T')[0];
@@ -138,7 +138,7 @@ class FiveDayForeCast extends React.Component {
 
       render() {
           let threeHours = [];
-          let iconurl = 'http://openweathermap.org/img/w/';
+          let iconurl = 'https://openweathermap.org/img/w/';
           let imgext = '.png';
           let today = new Date();
           let thirdDay = new Date(today);

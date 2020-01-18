@@ -110,7 +110,7 @@ class ThreeHourForecast extends React.Component{
     render(){
         const items = [];
 
-        let iconurl = 'http://openweathermap.org/img/w/';
+        let iconurl = 'https://openweathermap.org/img/w/';
 
         let imgext = '.png';
 

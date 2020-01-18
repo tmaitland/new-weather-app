@@ -62,7 +62,7 @@ class FiveDayForeCast extends React.Component {
         };
     }
     getWeather = () => {
-        const api_call = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
+        const api_call = `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.givenCity},${this.state.givenCountry}&appid=${APPID}&units=imperial`;
         
         axios.get(api_call).then(response => {
             this.setState({
@@ -116,7 +116,7 @@ class FiveDayForeCast extends React.Component {
 
       render() {
           let fivedays = [];
-          let iconurl = 'http://openweathermap.org/img/w/';
+          let iconurl = 'https://openweathermap.org/img/w/';
           let imgext = '.png';
           let limitNum = this.state.day.length / 5;
 
