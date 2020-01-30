@@ -182,7 +182,7 @@ class FiveDayForeCast extends React.Component {
                     </div>
                     <div className="tempHighLow">
                         <span className="temp">{this.state.minTemp[i]}&#176;F</span>
-                        <span>|</span>
+                        <span className="divider">|</span>
                         <span className="temp">{this.state.maxTemp[i]}&#176;F</span>
                     </div>   
                   

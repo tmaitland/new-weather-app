@@ -136,7 +136,7 @@ class FiveDayForeCast extends React.Component {
             if(eachDay) {
             
             fivedays.push(
-            <Link style={noUnderline} to = {`./${dayForecast[i + limitNum]}`}><div className="weatherCard">
+            <Link style={noUnderline} to = {`./${dayForecast[i + limitNum]}`}><div className="five4castcard">
                 <h3>{weekDays[weekDay]}</h3>
                 <div className="holdIcon">
                     <img src={`${iconurl}${this.state.icon[i]}${imgext}`} alt="weather icon" />

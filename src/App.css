@@ -107,6 +107,18 @@ body {
   display: flex;
     flex-direction: column;
     align-items: center;
+    width: 65px;
+    border-bottom: 5px solid cornflowerblue;
+    padding: 1rem 2rem 2rem 2rem;
+    background-color: white;
+    margin: 0rem 0rem 0.5rem 0rem;
+    top: 0px;
+    transition: top 125ms linear;
+  }
+.five4castcard {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 90px;
     border-bottom: 5px solid cornflowerblue;
     padding: 1rem 2rem 2rem 2rem;
@@ -115,7 +127,9 @@ body {
     top: 0px;
     transition: top 125ms linear;
   }
-
+  .divider {
+    padding: 0rem .3rem;
+  }
 .holdFCBtns {
   display: flex;
     justify-content: space-evenly;
@@ -174,6 +188,7 @@ body {
   display: flex;
     justify-content: space-between;
     width: 100%;
+    /* font-size: .8rem; */
 }
 
 .section .container {
@@ -206,6 +221,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cityAndIcon {
   font-size: 2rem;
+  margin: 1rem 0rem;
 }
 
 .frontPageIcon {
