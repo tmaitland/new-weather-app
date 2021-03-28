@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/about-the-weather/static/css/main.cbdf42f9.chunk.css",
+    "main.js": "/about-the-weather/static/js/main.da11f492.chunk.js",
+    "main.js.map": "/about-the-weather/static/js/main.da11f492.chunk.js.map",
+    "runtime~main.js": "/about-the-weather/static/js/runtime~main.6b87efa2.js",
+    "runtime~main.js.map": "/about-the-weather/static/js/runtime~main.6b87efa2.js.map",
+    "static/js/2.42cbf322.chunk.js": "/about-the-weather/static/js/2.42cbf322.chunk.js",
+    "static/js/2.42cbf322.chunk.js.map": "/about-the-weather/static/js/2.42cbf322.chunk.js.map",
+    "index.html": "/about-the-weather/index.html",
+    "precache-manifest.60597ec54ff16aa71722fa4eebc414ee.js": "/about-the-weather/precache-manifest.60597ec54ff16aa71722fa4eebc414ee.js",
+    "service-worker.js": "/about-the-weather/service-worker.js",
+    "static/css/main.cbdf42f9.chunk.css.map": "/about-the-weather/static/css/main.cbdf42f9.chunk.css.map",
+    "static/media/App.css": "/about-the-weather/static/media/sunnyDay-min.f747b3b2.jpg"
+  }
+}
