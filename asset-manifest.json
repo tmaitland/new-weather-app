@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/new-weather-app/static/css/main.78801158.chunk.css",
+    "main.js": "/new-weather-app/static/js/main.472b1508.chunk.js",
+    "main.js.map": "/new-weather-app/static/js/main.472b1508.chunk.js.map",
+    "runtime~main.js": "/new-weather-app/static/js/runtime~main.145d3feb.js",
+    "runtime~main.js.map": "/new-weather-app/static/js/runtime~main.145d3feb.js.map",
+    "static/js/2.1fe3800b.chunk.js": "/new-weather-app/static/js/2.1fe3800b.chunk.js",
+    "static/js/2.1fe3800b.chunk.js.map": "/new-weather-app/static/js/2.1fe3800b.chunk.js.map",
+    "index.html": "/new-weather-app/index.html",
+    "precache-manifest.b8d51ea7c18d095fb7a7c14ea404235d.js": "/new-weather-app/precache-manifest.b8d51ea7c18d095fb7a7c14ea404235d.js",
+    "service-worker.js": "/new-weather-app/service-worker.js",
+    "static/css/main.78801158.chunk.css.map": "/new-weather-app/static/css/main.78801158.chunk.css.map",
+    "static/media/App.css": "/new-weather-app/static/media/sunnyDay-min.f747b3b2.jpg"
+  }
+}
